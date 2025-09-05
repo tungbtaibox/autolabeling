@@ -228,7 +228,7 @@ int AutoLabeling::processModelAndImages(
     float conf_threshold,
     float iou_threshold,
     float mask_threshold) {
-
+    int autolabeling_result;
     try {
         std::cout << "Starting auto labeling process..." << std::endl;
 
@@ -261,21 +261,22 @@ int AutoLabeling::processModelAndImages(
         }
 
         // Bước 5: Thực hiện auto labeling với class names từ Categories
-        auto autolabeling_result = autoLabelImages(imageFiles, model_path, classNames, output_dir.toStdString(),
+        autolabeling_result = autoLabelImages(imageFiles, model_path, classNames, output_dir.toStdString(),
                                conf_threshold, iou_threshold, mask_threshold);
-        if (autolabeling_result == 1) {
+        if (!autolabeling_result) {
         //Bước 6: Xoa folder da giải nén
             if (!deleteFolderSafe(extracted_path)) {
                 std::cerr << "Failed to delete extracted folder" << std::endl;
                 return 0;
             }
         }
-
     } catch (const std::exception& e) {
         std::cerr << "Error in processModelAndImages: " << e.what() << std::endl;
         return 0;
     }
+    return autolabeling_result ;
 }
+
 
 bool AutoLabeling::saveLabelMap(const std::string& output_path,
                                 const std::unordered_map<int, std::string>& names,

@@ -18,8 +18,9 @@ std::vector<cv::Scalar> posePalette = {
 
 std::vector<int> limbColorIndices = {9, 9, 9, 9, 7, 7, 7, 0, 0, 0, 0, 0, 16, 16, 16, 16, 16, 16, 16};
 std::vector<int> kptColorIndices = {16, 16, 16, 16, 16, 0, 0, 0, 0, 0, 0, 9, 9, 9, 9, 9, 9};
+
 cv::Scalar generateRandomColor(int numChannels) {
-    if (numChannels < 1 || numChannels > 3) {
+    if ((numChannels < 1) || (numChannels > 3)) {
         throw std::invalid_argument("Invalid number of channels. Must be between 1 and 3.");
     }
 

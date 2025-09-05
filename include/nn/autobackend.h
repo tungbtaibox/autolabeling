@@ -5,7 +5,7 @@
 #include <unordered_map>
 #include <opencv2/core/mat.hpp>
 
-#include "onnx_model_base.h"
+#include "nn/onnx_model_base.h"
 #include "constants.h"
 
 /**
